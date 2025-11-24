@@ -1,0 +1,51 @@
+@startuml oppgave2
+title Oppgave 2 - Menyregister (klassediagram)
+
+class Oppgave2 {
+  + main(args: String[]): void
+  + printMenu(): void
+  + leggTilRett(register: MenyRegister): void
+  + finnRett(register: MenyRegister): void
+  + finnRetterAvType(register: MenyRegister): void
+  + registrerMeny(register: MenyRegister): void
+  + finnMenyerIPrisintervall(register: MenyRegister): void
+  + listAlleMenyer(register: MenyRegister): void
+}
+
+class Rett {
+  - navn: String
+  - type: String
+  - pris: double
+  - oppskrift: String
+  + getNavn(): String
+  + getType(): String
+  + getPris(): double
+  + getOppskrift(): String
+  + toString(): String
+}
+
+class Meny {
+  - navn: String
+  - retter: Set<Rett>
+  + getNavn(): String
+  + getRetter(): Set<Rett>
+  + totalPris(): double
+  + toString(): String
+}
+
+class MenyRegister {
+  - retter: Map<String, Rett>
+  - menyer: Map<String, Meny>
+  + registrerRett(r: Rett): boolean
+  + finnRett(navn: String): Rett
+  + finnRetterAvType(type: String): List<Rett>
+  + registrerMeny(m: Meny): boolean
+  + finnMenyerMedTotalprisInnenfor(min: double, max: double): List<Meny>
+  + hentAlleMenyer(): List<Meny>
+}
+
+Oppgave2 ..> MenyRegister
+MenyRegister o-- "0..*" Rett : retter
+MenyRegister o-- "0..*" Meny : menyer
+Meny "0..*" o-- "0..*" Rett : retter
+@enduml

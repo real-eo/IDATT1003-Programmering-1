@@ -1,0 +1,27 @@
+@startuml sekvensdiagram2
+title Sekvens - Én runde i while-løkken
+
+actor "main()" as M
+participant "Spiller A" as A
+participant "Spiller B" as B
+
+M -> A : kastTerningen(eksaktHundre)
+activate A
+A --> M : kastA (int)
+deactivate A
+
+M -> B : kastTerningen(eksaktHundre)
+activate B
+B --> M : kastB (int)
+deactivate B
+
+M -> A : getSumPoeng()
+A --> M : sumA
+M -> B : getSumPoeng()
+B --> M : sumB
+
+M -> A : erFerdig()
+A --> M : bool
+M -> B : erFerdig()
+B --> M : bool
+@enduml

@@ -1,0 +1,19 @@
+@startuml oppgave1
+title Oppgave 1 - Valuta og klient
+
+class Valuta {
+  -navn : String
+  -kursNokPerEnhet : double
+  +Valuta(navn: String, kursNokPerEnhet: double)
+  +getNavn() : String
+  +getKortNavn() : String
+  +tilNok(belop: double) : double
+  +fraNok(belopINok: double) : double
+}
+
+class Oppgave1 {
+  +main(args: String[]) : void
+}
+
+Oppgave1 ..> Valuta : bruker
+@enduml

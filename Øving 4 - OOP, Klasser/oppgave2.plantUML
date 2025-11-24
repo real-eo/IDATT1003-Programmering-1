@@ -1,0 +1,39 @@
+@startuml oppgave2
+title Oppgave2 - Detaljert klassediagram
+
+skinparam classAttributeIconSize 0
+
+package "Terningspill 100" {
+  class Spiller {
+    - terning : Random
+    - sumPoeng : int
+    - trekkNeste : boolean
+    - sistVarTrekk : boolean
+    + getSumPoeng() : int
+    + erFerdig() : boolean
+    + sistOperasjonVarTrekk() : boolean
+    + kastTerningen(eksaktHundre: boolean) : int
+  }
+
+  class Oppgave2 {
+    + main(args: String[]) : void
+  }
+}
+
+Spiller --> Random : bruker
+Oppgave2 ..> Spiller : oppretter/bruker
+
+note right of Spiller
+sumPoeng    : akkumulert poeng (0..100+)
+trekkNeste  : styrer om neste kast skal trekkes (eksaktHundre=true)
+sistVarTrekk: brukes kun for utskrift
+kastTerningen:
+  - Kaster 1 => reset (sumPoeng=0)
+  - Standard: legg til kast (1 gir reset)
+  - Eksakt 100:
+      * overskridelse setter trekkNeste=true
+      * neste kast trekkes
+      * veksel mellom +/- til 100 nås
+end note
+
+@enduml

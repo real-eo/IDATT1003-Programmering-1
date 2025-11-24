@@ -1,0 +1,63 @@
+@startuml oppgave1
+title Gloppen Eiendomsregister - Klassediagram
+
+class RealEstateApp {
+  - register: PropertyRegister
+  + main(args: String[]): void
+  - seedTestData(): void
+}
+
+class ConsoleMenu {
+  - register: PropertyRegister
+  - scanner: Scanner
+  + ConsoleMenu(register: PropertyRegister)
+  + start(): void
+  -- Intern --
+  - show(): int
+  - addProperty(): void
+  - listAll(): void
+  - search(): void
+  - averageArea(): void
+}
+
+class PropertyRegister {
+  - properties: List<Property>
+  + addProperty(p: Property): boolean
+  + deleteProperty(knr:int, gnr:int, bnr:int): boolean
+  + getAll(): List<Property>
+  + find(knr:int, gnr:int, bnr:int): Optional<Property>
+  + findByLotNumber(gnr:int): List<Property>
+  + averageArea(): double
+  + size(): int
+}
+
+class Property {
+  - municipalityNumber: int
+  - municipalityName: String
+  - lotNumber: int
+  - sectionNumber: int
+  - name: String
+  - areaSqm: double
+  - ownerName: String
+  + Property(...)
+  + idString(): String
+  + getMunicipalityNumber(): int
+  + getMunicipalityName(): String
+  + getLotNumber(): int
+  + getSectionNumber(): int
+  + getName(): String
+  + getAreaSqm(): double
+  + getOwnerName(): String
+  + setName(name:String): void
+  + setAreaSqm(area:double): void
+  + setOwnerName(owner:String): void
+  + toString(): String
+  + equals(o:Object): boolean
+  + hashCode(): int
+}
+
+RealEstateApp --> ConsoleMenu : oppretter
+RealEstateApp *-- PropertyRegister : eier
+ConsoleMenu --> PropertyRegister : bruker API
+PropertyRegister *-- Property : holder (1..*)
+@enduml

@@ -1,0 +1,26 @@
+@startuml oppgave4b
+title "Skriv ut alle eiendommer i registeret" - Sekvensdiagram
+
+actor Bruker
+participant ConsoleMenu
+participant PropertyRegister
+participant System.out
+participant Property
+
+Bruker -> ConsoleMenu: Velger "2. Skriv ut alle"
+ConsoleMenu -> PropertyRegister: size()
+PropertyRegister --> ConsoleMenu: n
+ConsoleMenu -> System.out: println("Alle eiendommer (n):")
+
+alt n == 0
+    ConsoleMenu -> System.out: println("(Ingen registrert)")
+else n > 0
+    ConsoleMenu -> PropertyRegister: getAll()
+    PropertyRegister --> ConsoleMenu: List<Property>
+    loop for hver Property p
+        ConsoleMenu -> Property: toString()
+        Property --> ConsoleMenu: String
+        ConsoleMenu -> System.out: println(p)
+    end
+end
+@enduml

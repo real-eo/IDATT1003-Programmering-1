@@ -1,0 +1,19 @@
+@startuml diagram
+actor Bruker
+participant "Oppgave1" as Klient
+participant ArbTaker
+participant Person
+
+Klient -> ArbTaker: navnEtterFornavn()
+ArbTaker -> Person: getEtternavn()
+ArbTaker <-- Person: `etternavn`
+ArbTaker -> Person: getFornavn()
+ArbTaker <-- Person: `fornavn`
+Klient <-- ArbTaker: "Etternavn, Fornavn"
+
+Klient -> ArbTaker: alder()
+ArbTaker -> Person: getFodselsaar()
+ArbTaker <-- Person: `fodselsaar`
+Klient <-- ArbTaker: alder (år)
+@enduml
+ 
